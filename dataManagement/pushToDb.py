@@ -15,7 +15,6 @@ def main():
     cur = conn.cursor()
 
     # Only want to create and build quotes and authors tables once!
-    count = 0
     for item in getAllQuotes():
         q = item["quote"]
         a = item["author"]
@@ -27,11 +26,6 @@ def main():
         else:
             num_quotes = cur.fetchone()[2]
             cur.execute("UPDATE authors SET num_quotes=%s WHERE name=%s", (num_quotes + 1, a))
-
-        # Mechanism to ensure changes are saved throughout
-        if count % 10 == 0:
-            conn.commit()
-        count += 1
 
     # Save Changes and Close communication with database
     conn.commit()

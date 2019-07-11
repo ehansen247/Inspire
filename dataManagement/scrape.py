@@ -33,7 +33,7 @@ def getQuoteInfo(num):
 def getAllQuotes():
     quotes = []
 
-    for i in range(1, 4194):
+    for i in range(4170, 4194):
         try:
             quotes.append(getQuoteInfo(i))
         except: 
