@@ -1,4 +1,4 @@
-/* #searchInput {
+#searchInput {
     background-image: url('/searchIcon.png');
     background-position: 10px 10px;
     background-repeat: no-repeat;
@@ -27,4 +27,4 @@
   
   #resultsTable tr.header, #resultsTable tr:hover {
     background-color: #f1f1f1;
-  } */
+  }

@@ -1,0 +1,7 @@
+<div style="text-align:center">
+    <h2>Type in a quote or an author to get started</h2>
+    <span><input #searchText (keyup.enter)="searchSubmit(searchText.value)" type="text"></span>
+    <span><button (click)="searchSubmit(searchText.value)">Search</button></span>
+    <p>{{ value }}</p>
+</div>
+  
