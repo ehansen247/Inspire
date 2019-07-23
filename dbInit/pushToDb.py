@@ -14,18 +14,24 @@ def main():
                             host="ec2-107-20-185-16.compute-1.amazonaws.com")
     cur = conn.cursor()
 
-    # Only want to create and build quotes and authors tables once!
-    for item in getAllQuotes():
-        q = item["quote"]
-        a = item["author"]
-        cur.execute("INSERT INTO quotes (quote_text, author, length) VALUES (%s, %s, %s)", (q, a, len(q)))
+    # createUserQuotesTable(conn, cur)
 
-        cur.execute("SELECT * from authors WHERE name=%s", (a,))
-        if cur.rowcount == 0:
-            cur.execute("INSERT INTO authors (name, num_quotes) VALUES (%s, %s)", (a, 1))
-        else:
-            num_quotes = cur.fetchone()[2]
-            cur.execute("UPDATE authors SET num_quotes=%s WHERE name=%s", (num_quotes + 1, a))
+    # createAuthorTable(conn, cur)
+
+    # createQuoteTable(conn, cur)
+
+    # Only want to create and build quotes and authors tables once!
+    # for item in getAllQuotes():
+    #     q = item["quote"]
+    #     a = item["author"]
+    #     cur.execute("INSERT INTO quotes (quote_text, author, length) VALUES (%s, %s, %s)", (q, a, len(q)))
+
+    #     cur.execute("SELECT * from authors WHERE name=%s", (a,))
+    #     if cur.rowcount == 0:
+    #         cur.execute("INSERT INTO authors (name, num_quotes) VALUES (%s, %s)", (a, 1))
+    #     else:
+    #         num_quotes = cur.fetchone()[2]
+    #         cur.execute("UPDATE authors SET num_quotes=%s WHERE name=%s", (num_quotes + 1, a))
 
     # Save Changes and Close communication with database
     conn.commit()
@@ -40,8 +46,6 @@ def createQuoteTable(conn, cur):
         a = item["author"]
         cur.execute("INSERT INTO quotes (%s, %s, %s)", (q, a, len(q)))
 
-        
-
 def createAuthorTable(conn, cur):
     cur.execute("CREATE TABLE authors (id serial PRIMARY KEY, name varchar(255), num_quotes integer);")
     
@@ -54,6 +58,8 @@ def createAuthorTable(conn, cur):
             num_quotes = cur.fetchOne()[2]
             cur.execute("UPDATE authors SET num_quotes=%s WHERE name=%s", (num_quotes + 1, a))
 
+def createUserQuotesTable(conn, cur):
+    cur.execute("CREATE TABLE userquotes (id serial PRIMARY KEY, quote_text TEXT, username varchar(255), email varchar(255));")
 
 if __name__ == "__main__":
     main()

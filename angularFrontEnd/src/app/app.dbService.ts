@@ -14,6 +14,12 @@ import { HttpClient } from '@angular/common/http';
     const results = this.http.post(this.apiUrl + "search", {"text": text, "type": type});
     return results;
   }
+
+  submitUserQuote(text, user) {
+    console.log("reached");
+    const results = this.http.post(this.apiUrl + "submitUserQuote", {"text" : text, "user" : user});
+    return results;
+  }
 }
 
 // export interface Config {

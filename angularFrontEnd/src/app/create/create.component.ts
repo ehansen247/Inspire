@@ -13,8 +13,8 @@ export class CreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  submitQuote () {
-    alert("Remember your username. Use it to lookup your past quotes in the search tab");
-
+  submitQuote (text, user) {
+    alert("Remember your username so you can lookup your quotes later. Don't share your username with anyone else.");
+    this.dbServ.submitUserQuote(text, user).subscribe(res => console.log(res), err => console.log(err));
   }
 }

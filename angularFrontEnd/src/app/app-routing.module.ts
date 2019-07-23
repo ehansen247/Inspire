@@ -7,6 +7,9 @@ import { CreateComponent } from './create/create.component';
 
 
 const routes: Routes = [
+  { path: '', 
+    redirectTo: '/search',
+    pathMatch: 'full'},
   { path: 'search', component: SearchComponent },
   { path: 'daily', component: QOfDayComponent },
   { path: 'create', component: CreateComponent }
