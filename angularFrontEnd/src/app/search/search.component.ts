@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DbService } from '../app.dbService';
 
 import { $ } from 'protractor';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-search',
@@ -13,19 +14,70 @@ export class SearchComponent implements OnInit {
   
   constructor(private dbServ :  DbService) {  }
 
+  resultsPending = false;
+  noResults = false;
+  resultsReturned = false;
+
+  queryResults = [];
+  displayResults = [];
+  rowIndex = 0;
+  endIndex = 8;
+
   ngOnInit() {
   }
 
-  value = "";
-  query = "Love";
-  dataAcquired = false;
-  queryType = "Quote";
+  reset() {
+    this.resultsPending = true;
+    this.noResults = false;
+    this.resultsReturned = false;
 
-  // queryType, author, quote, userID
+    this.queryResults = [];
+    this.displayResults = [];
+    this.rowIndex = 0;
+    this.endIndex = 8;
+  }
 
-  searchSubmit(text: string) {
+  updateTable(rows) {
+    // No results
+    if (rows.length == 0) {
+      this.noResults = true;
+      this.resultsPending = false;
+    }
+    // Show first eight results
+    else {
+      this.resultsReturned = true;
+
+      this.resultsPending = false;
+      this.queryResults = rows;
+      this.endIndex = Math.min(this.endIndex, this.queryResults.length);
+      this.displayResults = this.queryResults.slice(this.rowIndex, this.endIndex);
+    }
+  }
+
+  forwardDisplay() {
+    console.log("reached0");
+    if (this.endIndex < this.queryResults.length)
+    {
+      this.rowIndex = this.endIndex;
+      this.endIndex = Math.min(this.endIndex + 8, this.queryResults.length);
+      this.displayResults = this.queryResults.slice(this.rowIndex, this.endIndex);
+
+    }
+  }
+
+  backwardDisplay() {
     console.log("reached1");
-    this.dbServ.getQuery().subscribe(res => console.log("reached3"), err => console.log(err));
+    if (this.rowIndex > 0) {
+      this.endIndex = this.rowIndex; 
+      this.rowIndex = Math.max(0, this.rowIndex - 8);
+      this.displayResults = this.queryResults.slice(this.rowIndex, this.endIndex);
+    }
+  }
+
+  searchSubmit(text: string, type: string) {
+    this.reset();
+    this.dbServ.getQuery(text, type)
+      .subscribe(res => this.updateTable(res["success"]), err => console.log(err));
   }
 
 }

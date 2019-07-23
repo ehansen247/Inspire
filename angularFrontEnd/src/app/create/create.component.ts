@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DbService } from '../app.dbService';
 
 @Component({
   selector: 'app-create',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dbServ : DbService) { }
 
   ngOnInit() {
   }
 
+  submitQuote () {
+    alert("Remember your username. Use it to lookup your past quotes in the search tab");
+
+  }
 }

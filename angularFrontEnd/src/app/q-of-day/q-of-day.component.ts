@@ -12,4 +12,7 @@ export class QOfDayComponent implements OnInit {
   ngOnInit() {
   }
 
+  dailyAuthor = "Robert Oppenheimer";
+  dailyText = "Any man whose errors take ten years to correct is quite a man"
+
 }

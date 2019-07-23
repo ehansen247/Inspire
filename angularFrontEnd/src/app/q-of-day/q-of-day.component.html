@@ -1,3 +1,12 @@
-<div style="text-align:center">
-    <h3>Here's your quote of the day!</h3>
+<div class="container" id="dailyDiv" style="text-align:center">
+    <!-- TODO generate random background based on quote? -->
+    <!-- Quote Text -->
+    <p style="font-style:italic;" class="h3"><q> {{ dailyText }} </q></p>
+
+    <!-- Author -->
+    <p style="font-style:italic;" class="h3"> ~ &nbsp; {{ dailyAuthor }} </p>
+</div>
+
+<div id="footer" class="container">
+    <footer>See more by <a id="authorLink" href="/search">{{ dailyAuthor }}</a></footer>
 </div>

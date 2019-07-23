@@ -8,11 +8,11 @@ import { HttpClient } from '@angular/common/http';
   export class DbService {
   constructor(private http: HttpClient) { }
 
-  apiUrl = "http://localhost:8000/api/get/";
+  apiUrl = "http://localhost:8000/api/";
 
-  getQuery() {
-    console.log("reached2");
-    return this.http.get(this.apiUrl);
+  getQuery(text, type) {
+    const results = this.http.post(this.apiUrl + "search", {"text": text, "type": type});
+    return results;
   }
 }
 

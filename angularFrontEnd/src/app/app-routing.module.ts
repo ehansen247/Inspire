@@ -8,7 +8,7 @@ import { CreateComponent } from './create/create.component';
 
 const routes: Routes = [
   { path: 'search', component: SearchComponent },
-  { path: 'qOfDay', component: QOfDayComponent },
+  { path: 'daily', component: QOfDayComponent },
   { path: 'create', component: CreateComponent }
 ];
 

@@ -1,30 +1,45 @@
-/* #searchInput {
-    background-image: url('/searchIcon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    width: 100%;
-    font-size: 16px;
-    padding: 12px 20px 12px 40px;
-    border: 1px solid #ddd;
-    margin-bottom: 12px;
-  }
+h1 {
+  font-size: 1.2em;
+  margin-bottom: 0;
+}
+h2 {
+  font-size: 2em;
+  margin-top: 0;
+  padding-top: 0;
+}
 
-  #resultsTable {
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid #ddd;
-    font-size: 18px;
-  }
+#banner {
+  color: whitesmoke;
+  padding-bottom: 4px;
+  background-color: rgb(133, 76, 207);
+  margin-bottom: 40px;
+}
 
-  #resultsTable th, #resultsTable td {
-    text-align: left;
-    padding: 12px;
-  }
-  
-  #resultsTable tr {
-    border-bottom: 1px solid #ddd;
-  }
-  
-  #resultsTable tr.header, #resultsTable tr:hover {
-    background-color: #f1f1f1;
-  } */
+#banner p {
+  position: relative;
+  left: 2.5%;  
+}
+
+.navDiv {
+  text-align: center;
+}
+nav a {
+  font-size: 1.35em;
+  margin: 4px;
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+}
+nav a:visited, a:link {
+  color: #334953;
+}
+nav a:hover {
+  color: #039be5;
+  background-color: #cfd8dc;
+}
+nav a.active {
+  color: #039be5;
+}

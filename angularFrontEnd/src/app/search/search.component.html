@@ -1,7 +1,58 @@
-<div style="text-align:center">
-    <h2>Type in a quote or an author to get started</h2>
-    <span><input #searchText (keyup.enter)="searchSubmit(searchText.value)" type="text"></span>
-    <span><button (click)="searchSubmit(searchText.value)">Search</button></span>
-    <p>{{ value }}</p>
+<div class="container" style="text-align:center">
+    <br> <br>
+    <br> <br>
+    <div class="container">
+        <div id="inputDiv" class="container">
+            <p style="text-align: left;" class="h2">Lookup</p>
+            <input #searchText placeholder="Enter a quote or an author's name" id="searchInput" #searchInput (keyup.enter)="searchSubmit(searchText.value, queryType.value)" type="text">
+        </div>
+        <br>
+            <span>
+                <p class="h4">Search by: &nbsp; </p>
+            </span>
+            <span>
+                <select class="form-control" #queryType>
+                        <option selected value="quote">Quote &nbsp; </option>  
+                        <option value="author">Author</option>
+                </select>
+            </span> &nbsp;
+            <span>
+                <button class="btn btn-info" id="searchButton" (click)="searchSubmit(searchText.value, queryType.value)">Search</button>
+        </span>
+        <br> <br>
+        <br> <br>
+        <div id="tableDiv" class="container">
+            <table id="resultsTable">
+                <tr class="header">
+                    <th style="width:80%;">Quote</th>
+                    <th style="width:20%;">Author</th>
+                </tr>
+
+                <tr *ngFor="let result of displayResults">
+                    <td><q>{{ result.quote }}</q></td>
+                    <td><p>{{ result.author }}</p></td>
+                </tr>
+
+                <tr *ngIf ="noResults">
+                    <td><p>No results</p></td>
+                    <td><p>&nbsp;</p></td>
+                </tr>
+            </table>
+
+            <div id="resultsNav" *ngIf="resultsReturned">
+                <span><button (click)="backwardDisplay()">Back</button></span>
+                <span><p>&nbsp; Showing {{this.rowIndex + 1}} - {{this.endIndex}} of {{this.queryResults.length}} results &nbsp; </p></span>
+                <span><button (click)="forwardDisplay()">Next</button></span>
+            </div>
+
+            <div *ngIf="resultsPending">
+                <span><p class="h3">Results pending &nbsp; &nbsp;</p></span><span><div class="loader"></div></span>
+            </div>
+            
+            
+
+            
+        </div>
+    </div>
 </div>
   
