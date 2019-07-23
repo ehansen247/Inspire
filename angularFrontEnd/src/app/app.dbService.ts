@@ -11,7 +11,9 @@ import { HttpClient } from '@angular/common/http';
   apiUrl = "http://localhost:8000/api/";
 
   getQuery(text, type) {
+    console.log("reached");
     const results = this.http.post(this.apiUrl + "search", {"text": text, "type": type});
+    console.log(results);
     return results;
   }
 

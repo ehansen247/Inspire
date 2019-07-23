@@ -15,13 +15,13 @@ export class SearchComponent implements OnInit {
   constructor(private dbServ :  DbService) {  }
 
   resultsPending = false;
-  noResults = false;
+  noResults = true;
   resultsReturned = false;
 
   queryResults = [];
   displayResults = [];
   rowIndex = 0;
-  endIndex = 8;
+  endIndex = 5;
 
   ngOnInit() {
   }
@@ -34,7 +34,7 @@ export class SearchComponent implements OnInit {
     this.queryResults = [];
     this.displayResults = [];
     this.rowIndex = 0;
-    this.endIndex = 8;
+    this.endIndex = 5;
   }
 
   updateTable(rows) {
@@ -59,7 +59,7 @@ export class SearchComponent implements OnInit {
     if (this.endIndex < this.queryResults.length)
     {
       this.rowIndex = this.endIndex;
-      this.endIndex = Math.min(this.endIndex + 8, this.queryResults.length);
+      this.endIndex = Math.min(this.endIndex + 5, this.queryResults.length);
       this.displayResults = this.queryResults.slice(this.rowIndex, this.endIndex);
 
     }
@@ -69,7 +69,7 @@ export class SearchComponent implements OnInit {
     console.log("reached1");
     if (this.rowIndex > 0) {
       this.endIndex = this.rowIndex; 
-      this.rowIndex = Math.max(0, this.rowIndex - 8);
+      this.rowIndex = Math.max(0, this.rowIndex - 5);
       this.displayResults = this.queryResults.slice(this.rowIndex, this.endIndex);
     }
   }

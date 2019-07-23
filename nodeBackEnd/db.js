@@ -20,12 +20,11 @@ export function query (text, type, callback) {
     }
     else if (type === "quote") {
       query = "SELECT quote_text, author FROM quotes WHERE quote_text LIKE $1 OR quote_text LIKE $2";
-      values = ["% " + text + "%", "%" + text.charAt(0).toUpperCase() + text.slice(1) + "%"];
+      values = ["% " + text.toLowerCase() + "%", "%" + text.charAt(0).toUpperCase() + text.slice(1) + "%"];
     }
     else { // (type == "Random") id between 12 and 4108
-      const rand = Math.round(Math.random() * 4096) + 12
       query = "SELECT quote_text, author FROM quotes WHERE id = $1";
-      values = [rand];
+      values = [parseInt(text)];
     }
     pool.connect((err, client, release) => {
       if (err) {

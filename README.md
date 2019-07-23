@@ -1,43 +1,19 @@
 # Inspire
-Inspirational quote generator that pulls from databases of historic and cinematic quotes
+A living database of quotes intended to inspire. 
 
-## Feature Table
-1) Quote       (VarChar or Text)
-2) Author     (VarChar)
-3) Quote Category (???)
-    a) Motivational
-    b) Love
-    c) Beautiful
-    d) Abstract
-    e) Comedic
-    f) Fitness
-    g) Freedom
-    h) Friendship
-    i) Life
-    j) Success
-    k) Athletic
-    Simplified:
-    a) Motivational
-    b) Love
-    c) Famous
+Search a database of over 4,000 quotes, check out our daily quotes, or write and save your own quote in our database.
+Created with Angular front end, Node.js/Express on the server-side, and a PostgreSQL database hosted by Heroku.  
 
-4) Fictional / Real (BOOLEAN)
-5) Length in Characters (INT)
-6) Quote Date
+After cloning the repo, call both "npm run start" from the "nodeBackEnd" directory and "npm start" from the 
+"angularFrontEnd" directory. The web app's functionality requires that the both the application's client and server 
+are running from the localhost. Afterwards, navigate to localhost:4200 to see the homepage.
 
-1) Quote Table
-Quote text,
-quote length,
-quote category, author id
 
-2) Author Table
-Author First/Last
-Birth
-Death
-Category 
+TODO:
+Expanding the database.
+Categorizing quotes by theme.
+Username/password/email authentication.
+Load DailyQuote upon initial access. 
+Set DailyQuote for local time zone, not UTC.
 
-Sources:
-<!-- 1) Brainy Quote -->
-2) WikiQuote
-3) quotedb
-4) quodb.com (Movie Quotes)
+Email any suggestions to ehansen247@gmail.com

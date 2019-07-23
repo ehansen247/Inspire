@@ -2,10 +2,10 @@
     <br> <br>
     <div class="container">
         <div id="inputDiv" class="container">
-            <p style="text-align: left;" class="h2">Lookup</p>
+            <!-- <p style="text-align: left;" class="h2">Lookup</p> -->
+            <br>
             <input #searchText placeholder="Enter a quote or an author's name" id="searchInput" #searchInput (keyup.enter)="searchSubmit(searchText.value, queryType.value)" type="text">
         </div>
-        <br>
             <span>
                 <p class="h4">Search by: &nbsp; </p>
             </span>
@@ -19,8 +19,7 @@
             <span>
                 <button class="btn btn-info" id="searchButton" (click)="searchSubmit(searchText.value, queryType.value)">Search</button>
         </span>
-        <br> <br>
-        <br> <br>
+        <br> <br> <br>
         <div id="tableDiv" class="container">
             <table id="resultsTable">
                 <tr class="header">
@@ -48,8 +47,6 @@
             <div *ngIf="resultsPending">
                 <span><p class="h3">Results pending &nbsp; &nbsp;</p></span><span><div class="loader"></div></span>
             </div>
-            
-            
 
             
         </div>
