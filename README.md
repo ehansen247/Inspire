@@ -10,10 +10,10 @@ are running from the localhost. Afterwards, navigate to localhost:4200 to see th
 
 
 TODO:
-Expanding the database.
 Categorizing quotes by theme.
-Username/password/email authentication.
+Encrypt Passwords.
 Load DailyQuote upon initial access. 
+Expanding the database of quotes.
 Set DailyQuote for local time zone, not UTC.
 
 Email any suggestions to ehansen247@gmail.com

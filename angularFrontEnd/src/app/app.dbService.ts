@@ -11,15 +11,17 @@ import { HttpClient } from '@angular/common/http';
   apiUrl = "http://localhost:8000/api/";
 
   getQuery(text, type) {
-    console.log("reached");
     const results = this.http.post(this.apiUrl + "search", {"text": text, "type": type});
-    console.log(results);
     return results;
   }
 
-  submitUserQuote(text, user) {
-    console.log("reached");
-    const results = this.http.post(this.apiUrl + "submitUserQuote", {"text" : text, "user" : user});
+  authenticate(username: string, password: string) {
+    const results = this.http.post(this.apiUrl + "authenticate", {"username" : username, "password" : password});
+    return results;
+  }
+
+  submitUserQuote(text, username, password) {
+    const results = this.http.post(this.apiUrl + "submitUserQuote", {"text" : text, "username" : username, "password" : password});
     return results;
   }
 }

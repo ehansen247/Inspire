@@ -14,6 +14,9 @@ def main():
                             host="ec2-107-20-185-16.compute-1.amazonaws.com")
     cur = conn.cursor()
 
+    # Uncomment any of the below options to create the tables or enter the user/author data
+    # As of 07/27/19, all necessary data has been created in the above database.
+
     # createUserQuotesTable(conn, cur)
 
     # createAuthorTable(conn, cur)
@@ -59,7 +62,7 @@ def createAuthorTable(conn, cur):
             cur.execute("UPDATE authors SET num_quotes=%s WHERE name=%s", (num_quotes + 1, a))
 
 def createUserQuotesTable(conn, cur):
-    cur.execute("CREATE TABLE userquotes (id serial PRIMARY KEY, quote_text TEXT, username varchar(255), email varchar(255));")
+    cur.execute("CREATE TABLE userquotes (id serial PRIMARY KEY, quote_text TEXT, username varchar(255), password varchar(255));")
 
 if __name__ == "__main__":
     main()

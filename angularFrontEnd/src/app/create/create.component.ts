@@ -12,13 +12,38 @@ export class CreateComponent implements OnInit {
 
   ngOnInit() {
   }
+  justSubmitted = false;
+  submissionText = "";
+
   quoteText = "";
   username = "";
+  password = "";
 
   submitQuote () {
-    alert("Remember your username so you can lookup your quotes later. Don't share your username with anyone else.");
-    this.dbServ.submitUserQuote(this.quoteText, this.username).subscribe(res => console.log(res), err => console.log(err));
+    this.dbServ.authenticate(this.username, this.password)
+      .subscribe(res => {
+        
+        if (res["message"] == "New User") {
+          this.submissionText = "We've added your username to the database. Congratulations on your first quote!";
+          this.dbServ.submitUserQuote(this.quoteText, this.username, this.password)
+            .subscribe(res => this.postSubmit(), err => console.log(err));
+        }
+        else if (res["message"] == "Authentication Valid") {
+          this.submissionText = "We've added your quote to the database.";
+          this.dbServ.submitUserQuote(this.quoteText, this.username, this.password)
+            .subscribe(res => this.postSubmit(), err => console.log(err));
+        }
+        else {
+          this.submissionText = "Sorry that username corresponds to a different password.";
+          this.postSubmit();
+        }
+      })
+  }
+
+  postSubmit() {
     this.quoteText = "";
     this.username = "";
+    this.password = "";
+    this.justSubmitted = true;
   }
 }

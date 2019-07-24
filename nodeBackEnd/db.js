@@ -1,9 +1,9 @@
 const { Pool, Client } = require('pg');
+const connectionString = "postgres://apfwknldnvcnwb:21c5e15664d7689b039bc1c59f84f7dd3944a2073625f511ee972e789206806e@ec2-107-20-185-16.compute-1.amazonaws.com:5432/d5q93bglraeukc"
 
 export function query (text, type, callback) {
     const pool = new Pool({
-      connectionString: "postgres://apfwknldnvcnwb:21c5e15664d7689b039bc1c59f84f7dd3944a2073625f511ee972e789206806e@ec2-107-20-185-16.compute-1.amazonaws.com:5432/d5q93bglraeukc"
-      ,
+      connectionString: connectionString,
       ssl: true,
     });
   
@@ -54,19 +54,47 @@ export function query (text, type, callback) {
     });
 }
 
+export function checkUserPassword(username, password, callback) {
+  const pool = new Pool({
+    connectionString: connectionString,
+    ssl: true,
+  });
+
+  pool.connect((err, client, release) => {
+    if (err) {
+      console.error('Error acquiring client', err.stack);
+    }
+    client.query("SELECT password FROM userquotes WHERE username=$1", [username], (err, result) => {
+      release();
+      if (err) {
+        console.log(err);
+        callback(err, null);
+      }
+      if (result.rowCount == 0) {
+        callback(null, "New User");
+      }
+      else if (result.rows[0].password == password) {
+        callback(null, "Authentication Valid");
+      }
+      else {
+        callback(null, "Authentication Invalid");
+      }
+      pool.end();
+    });
+  });
+}
+
 // No callback because data
-export function submitUserQuote(text, user, callback) {
-    console.log("reached");
+export function submitUserQuote(text, username, password, callback) {
     const pool = new Pool({
-        connectionString: "postgres://apfwknldnvcnwb:21c5e15664d7689b039bc1c59f84f7dd3944a2073625f511ee972e789206806e@ec2-107-20-185-16.compute-1.amazonaws.com:5432/d5q93bglraeukc"
-        ,
+        connectionString: connectionString,
         ssl: true,
       });
     pool.connect((err, client, release) => {
         if (err) {
             console.error('Error acquiring client', err.stack);
         }
-        client.query("INSERT INTO userquotes (quote_text, username) VALUES ($1, $2)", [text, user], (err, result) => {
+        client.query("INSERT INTO userquotes (quote_text, username, password) VALUES ($1, $2, $3)", [text, username, password], (err, result) => {
             release();
             if (err) {
               callback(err, null);
