@@ -6,10 +6,10 @@ export function query (text, type, callback) {
       connectionString: connectionString,
       ssl: true,
     });
-  
+
     var query = "";
     var values = [];
-  
+
     if (type === "author") {
       query = "SELECT quote_text, author FROM quotes WHERE author LIKE $1";
       values = ['%' + text.charAt(0).toUpperCase() + text.slice(1) + '%'];
@@ -47,7 +47,6 @@ export function query (text, type, callback) {
           }
           results.push({"quote": curRow.quote_text, "author": author});
         }
-        console.log(results);
         pool.end();
         callback(null, results);
       });

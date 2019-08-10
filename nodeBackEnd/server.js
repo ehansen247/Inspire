@@ -75,7 +75,7 @@ app.post('/api/submitUserQuote', (req, res, next) => {
       message: 'Text and User required'
     });
   }
-  else 
+  else
   {
     db.submitUserQuote(req.body.text, req.body.username, req.body.password, function(err, results) {
       if(err) {return next(err) };

@@ -1,1 +1,0 @@
-Thinking about implementing database as a MongoDB. PostgreSQL is working, but would like to learn about other options.
