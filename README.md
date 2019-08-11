@@ -22,8 +22,8 @@ Then check out localhost:4200 to see the website!
 
 
 TODO:
-*Categorizing quotes by theme.
-*Encrypt Passwords.
-*Load DailyQuote upon initial access. 
-*Expanding the database of quotes.
-*Set DailyQuote for local time zone, not UTC.
+* Categorizing quotes by theme.
+* Encrypt Passwords.
+* Load DailyQuote upon initial access. 
+* Expanding the database of quotes.
+* Set DailyQuote for local time zone, not UTC.
