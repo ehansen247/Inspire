@@ -1,5 +1,9 @@
 #username {
-    width: 40%;
+    width: 55%;
+}
+
+#password {
+    width: 55%;
 }
 
 #quoteText {
@@ -7,5 +11,5 @@
 }
 
 #formDiv {
-    width:70%;
+    width: 60%;
 }
