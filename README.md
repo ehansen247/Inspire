@@ -12,10 +12,12 @@ Developed with Angular front end, Node.js/Express on the server-side, and a Post
 git clone https://github.com/ehansen247/Inspire.git  
 cd Inspire  
 cd nodeBackend
+npm install
 npm run start
 ***In separate CLI window***
 cd Inspire
 cd angularFrontEnd
+npm install
 npm start
 ```
 Then check out localhost:4200 to see the website!
