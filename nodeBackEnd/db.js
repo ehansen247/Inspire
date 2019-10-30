@@ -1,5 +1,6 @@
 const { Pool, Client } = require('pg');
-const connectionString = "postgres://apfwknldnvcnwb:21c5e15664d7689b039bc1c59f84f7dd3944a2073625f511ee972e789206806e@ec2-107-20-185-16.compute-1.amazonaws.com:5432/d5q93bglraeukc"
+const connectionString = "postgres://mnxisfxgcnhmcy:8749b087f19f6dc40db8dcc75a345c93f658ba08bb6be3f26f16a332c2b1c4d7@ec2-174-129-43-40.compute-1.amazonaws.com:5432/dvvd6q46r3vbr"
+
 
 export function query (text, type, callback) {
     const pool = new Pool({
@@ -63,19 +64,23 @@ export function checkUserPassword(username, password, callback) {
     if (err) {
       console.error('Error acquiring client', err.stack);
     }
+    console.log(username);
     client.query("SELECT password FROM userquotes WHERE username=$1", [username], (err, result) => {
       release();
       if (err) {
         console.log(err);
+        console.log("reached");
         callback(err, null);
       }
       if (result.rowCount == 0) {
         callback(null, "New User");
       }
       else if (result.rows[0].password == password) {
+        console.log("reached1");
         callback(null, "Authentication Valid");
       }
       else {
+        console.log("reached2");
         callback(null, "Authentication Invalid");
       }
       pool.end();

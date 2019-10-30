@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+declare function SHA1(msg : string) : any;
+
 @Injectable({
     providedIn: 'root',
   })
-  
+
   export class DbService {
   constructor(private http: HttpClient) { }
 
@@ -16,12 +18,18 @@ import { HttpClient } from '@angular/common/http';
   }
 
   authenticate(username: string, password: string) {
-    const results = this.http.post(this.apiUrl + "authenticate", {"username" : username, "password" : password});
+    // Hash Password
+    const salt = "f1nd1ngn3m0";
+    const hash_pw = SHA1(salt + password);
+    const results = this.http.post(this.apiUrl + "authenticate", {"username" : username, "password" : hash_pw});
     return results;
   }
 
   submitUserQuote(text, username, password) {
-    const results = this.http.post(this.apiUrl + "submitUserQuote", {"text" : text, "username" : username, "password" : password});
+    // Hash Password
+    const salt = "f1nd1ngn3m0";
+    const hash_pw = SHA1(salt + password);
+    const results = this.http.post(this.apiUrl + "submitUserQuote", {"text" : text, "username" : username, "password" : hash_pw});
     return results;
   }
 }
