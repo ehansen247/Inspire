@@ -1,6 +1,7 @@
-import express from 'express';
-import bodyParser from "body-parser";
-import cors from "cors";
+
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const express = require("express");
 const db = require("./db.js");
 const app = express();
 
@@ -27,6 +28,10 @@ app.post("/api/search", (req, res, next) =>
   }
   else {
     db.query(req.body.text, req.body.type, function(err, results) {
+      // return res.status(200).send({
+      //   text: req.body.text,
+      //   type: req.body.type
+      // });
       if(err) { return next(err) };
       res.results = results;
       next();
@@ -59,6 +64,7 @@ app.post('/api/authenticate', (req, res, next) => {
   }
 });
 
+// Authenticate
 app.post('/api/authenticate', (req, res) => {
   return res.status(200).send({
     message: res.message,
@@ -91,6 +97,9 @@ app.post('/api/submitUserQuote', (req, res) => {
       message: 'Upload of user quote to database pending'
     });
 });
+
+// Test
+app.get('/api/test', db.getTest);
 
 // API will listen on localhost: 8000
 const PORT = 8000;
