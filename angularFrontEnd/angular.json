@@ -19,9 +19,6 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": false,
-            "styles": [
-              "src/styles.css"
-            ],
             "scripts": [
               "src/sha.js"
             ]
