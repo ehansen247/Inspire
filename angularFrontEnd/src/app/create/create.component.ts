@@ -21,30 +21,31 @@ export class CreateComponent implements OnInit {
 
   submitQuote () {
     try {
+      console.log("reached1");
       this.dbServ.authenticate(this.username, this.password)
       .subscribe(res => {
         if (res["message"] == "New User") {
           this.submissionText = "We've added your username to the database. Congratulations on your first quote!";
           this.dbServ.submitUserQuote(this.quoteText, this.username, this.password)
-            .subscribe(result => this.postSubmit(result), err => console.log(err));
+            .subscribe(result => this.postSubmit(result), err => this.handleSubmitError(err));
         }
         else if (res["message"] == "Authentication Valid") {
           this.submissionText = "We've added your quote to the database.";
           this.dbServ.submitUserQuote(this.quoteText, this.username, this.password)
-            .subscribe(result => this.postSubmit(result), err => console.log(err));
+            .subscribe(result => this.postSubmit(result), err => this.handleSubmitError(err));
         }
         else {
           this.submissionText = "Sorry that username corresponds to a different password.";
           this.clear();
         }
-      });
+      }, err => this.handleSubmitError(err));
     } catch (err) {
-      this.submissionText = "We encounted an error while handling your submission";
-      this.clear();
+      this.handleSubmitError(err);
     }
   }
 
   postSubmit(result) {
+    console.log("true");
     if (result["success"] != "True") {
       this.submissionText = "We encounted an error while handling your submission";
     }
@@ -56,5 +57,11 @@ export class CreateComponent implements OnInit {
     this.username = "";
     this.password = "";
     this.showSubmissionText = true;
+  }
+
+  handleSubmitError(err) {
+    console.log(err);
+    this.submissionText = "We encounted an error while handling your submission";
+    this.clear();
   }
 }
