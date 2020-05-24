@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angularFrontEnd';
-
 }
+
+export enum resultStatus {
+  Pending,
+  Failed,
+  None,
+  Returned
+};

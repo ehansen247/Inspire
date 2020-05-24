@@ -9,7 +9,7 @@ h2 {
 }
 
 #banner {
-  color: whitesmoke;  
+  color: whitesmoke;
   padding-bottom: 4px;
   background-color: rgb(133, 76, 207);
   margin-bottom: 40px;
@@ -17,7 +17,7 @@ h2 {
 
 #banner p {
   position: relative;
-  left: 2.5%;  
+  left: 2.5%;
 }
 #banner p a {
   color: whitesmoke;
@@ -51,13 +51,29 @@ nav a.active {
   color: #039be5;
 }
 #tag {
-  position: absolute; 
-  right: 40px; 
-  top: 27px; 
+  position: absolute;
+  right: 40px;
+  top: 27px;
   color: whitesmoke;
 }
 
 #tag:hover {
   text-decoration: none;
   color:  lightblue;
+}
+
+span {
+  display: inline-block;
+}
+
+.loader {
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #3498db; /* Blue */
+  border-bottom: 4px solid #3498db;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  animation: spin 2s linear infinite;
+  padding: 10px;
+  margin-top: 20px;
 }
