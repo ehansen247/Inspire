@@ -7,9 +7,8 @@ COPY . .
 RUN npm run build_prod
 
 
-# # Stage 2 Run
-# FROM node:12-alpine
-# COPY --from=build /usr/src/app/dist
+# For Local Deployment
+EXPOSE 4200
 
 # # For Non-Root User Testing (locally); necessary for build on Heroku
 # RUN adduser -D myuser
