@@ -1,10 +1,13 @@
 <div class="container" id="dailyDiv" style="text-align:center; width: 60%">
     <!-- TODO generate random background based on quote? -->
     <!-- Quote Text -->
-    <p style="font-style:italic;" class="h4"><q> {{ dailyText }} </q></p>
+    <p style="font-style:italic;" class="h3" *ngIf="dailyText">{{ dailyText }}</p>
+    <div *ngIf="resultsPending">
+        <span><p class="h3">Finding your results... &nbsp; &nbsp; </p></span><span><div class="loader"></div></span>
+    </div>
 
     <!-- Author -->
-    <p style="font-style:italic;" class="h4"> ~ &nbsp; {{ dailyAuthor }} </p>
+    <p style="font-style:italic;" class="h4" *ngIf="dailyAuthor"> - &nbsp; {{ dailyAuthor }} </p>
 </div>
 
 <!-- <div id="footer" class="container">
