@@ -7,6 +7,9 @@ Developed with Angular front end, Node.js/Express on the server-side, and a Post
 
 
 ### Deploying Locally
+
+Last tested with node 12.16.x and npm 6.14.x, breaks with node 14.x.x.  
+
 1. Clone the repository
 2. Create a database and set an environment variable INSPIRE_DB_CONNECTION_STRING to the connection string.
 3. Startup the Express Server on your localhost
