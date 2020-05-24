@@ -25,7 +25,7 @@ cd angularFrontEnd
 npm install
 npm start
 ```
-Then check out localhost:4200 to see the website!
+Then check out localhost:4200 to see the website! Note that the core features will be non-functional locally unless you create & fill your own database and configure the connection string as an environment variable.
 
 ### Deploying with Docker locally
 
