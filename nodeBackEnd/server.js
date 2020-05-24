@@ -22,16 +22,12 @@ app.post("/api/search", (req, res, next) =>
 {
   if(!req.body.text || !req.body.type) {
     return res.status(400).send({
-      success: 'false',
+      success: 'False',
       message: 'Text and Type required',
     });
   }
   else {
     db.query(req.body.text, req.body.type, function(err, results) {
-      // return res.status(200).send({
-      //   text: req.body.text,
-      //   type: req.body.type
-      // });
       if(err) { return next(err) };
       res.results = results;
       next();
@@ -50,7 +46,7 @@ app.post('/api/search', (req, res) => {
 app.post('/api/authenticate', (req, res, next) => {
   if(!req.body.username || !req.body.password) {
     return res.status(400).send({
-      success: 'false',
+      success: 'False',
       message: 'User and Password required'
     });
   }
@@ -77,7 +73,7 @@ app.post('/api/authenticate', (req, res) => {
 app.post('/api/submitUserQuote', (req, res, next) => {
   if(!req.body.text || !req.body.username || !req.body.password) {
     return res.status(400).send({
-      success: 'false',
+      success: 'False',
       message: 'Text and User required'
     });
   }

@@ -1,8 +1,8 @@
 const { Pool, Client } = require('pg');
 const connectionString = process.env.INSPIRE_DB_CONNECTION_STRING;
 
+// Search Query for a quote, author, or username
 const query = (text, type, callback) => {
-  console.log("reached");
   const client = new Client({
     connectionString: connectionString,
     ssl: true
@@ -29,11 +29,9 @@ const query = (text, type, callback) => {
     values = [parseInt(text)];
   }
 
-  console.log("reached2");
   client.query(query, values, (err, result) => {
-    console.log("reached3");
     if (err) {
-      console.log("reached4");
+      console.log(err);
       callback(err, null);
       return;
     }
@@ -60,22 +58,18 @@ const checkUserPassword = (username, password, callback) => {
   });
 
   client.connect();
-  console.log(username);
   client.query("SELECT password FROM userquotes WHERE username=$1", [username], (err, result) => {
     if (err) {
       console.log(err);
-      console.log("reached");
       callback(err, null);
     }
     if (result.rowCount == 0) {
       callback(null, "New User");
     }
     else if (result.rows[0].password == password) {
-      console.log("reached1");
       callback(null, "Authentication Valid");
     }
     else {
-      console.log("reached2");
       callback(null, "Authentication Invalid");
     }
     client.end();
@@ -84,7 +78,6 @@ const checkUserPassword = (username, password, callback) => {
 
 // No callback because data
 const submitUserQuote = (text, username, password, callback) => {
-  console.log("Submitting User Quote");
   const client = new Client({
     connectionString: connectionString,
     ssl: true,
@@ -92,6 +85,7 @@ const submitUserQuote = (text, username, password, callback) => {
   client.connect();
   client.query("INSERT INTO userquotes (quote_text, username, password) VALUES ($1, $2, $3)", [text, username, password], (err, result) => {
     if (err) {
+      console.log(err);
       callback(err, null);
     }
     callback(null, result);
@@ -105,13 +99,11 @@ const pool = new Pool({
 })
 
 const getTest = (request, response) => {
-  console.log("reached1");
   pool.query('SELECT * FROM quotes WHERE id = 1', [], (error, results) => {
     console.log("reached2");
     if (error) {
       throw error
     }
-    console.log(results);
     response.status(200).send("Successful");
   })
 }
