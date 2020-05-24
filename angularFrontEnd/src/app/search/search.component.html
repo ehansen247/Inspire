@@ -4,13 +4,13 @@
         <div id="inputDiv" class="container">
             <!-- <p style="text-align: left;" class="h2">Lookup</p> -->
             <br>
-            <input #searchText placeholder="Enter a quote or an author's name" id="searchInput" #searchInput (keyup.enter)="searchSubmit(searchText.value, queryType.value)" type="text">
+            <input #searchText placeholder="{{ placeholderText }}" id="searchInput" #searchInput (keyup.enter)="searchSubmit(searchText.value, queryType.value)" type="text">
         </div>
             <span>
                 <p class="h4">Search by: &nbsp; </p>
             </span>
             <span>
-                <select class="form-control" #queryType>
+                <select class="form-control" (change)="queryTypeChange($event.target.value)" #queryType>
                         <option selected value="quote">Quote &nbsp; </option>
                         <option value="author">Author</option>
                         <option value="username">Username</option>
@@ -32,21 +32,25 @@
                     <td><p>{{ result.author }}</p></td>
                 </tr>
 
-                <tr *ngIf ="noResults">
-                    <td><p>No results</p></td>
+                <!-- If No Results -->
+                <tr *ngIf ="status == none || status == failed">
+                    <td *ngIf="status == none"><p>No results</p></td>
+                    <td *ngIf="status == failed"><p>Sorry, we encountered an error during your search</p></td>
                     <td><p>&nbsp;</p></td>
                 </tr>
             </table>
 
-            <div id="resultsNav" *ngIf="resultsReturned">
+            <div id="resultsNav" *ngIf="status == returned">
                 <span><button (click)="backwardDisplay()">Back</button></span>
                 <span><p>&nbsp; Showing {{this.rowIndex + 1}} - {{this.endIndex}} of {{this.queryResults.length}} results &nbsp; </p></span>
                 <span><button (click)="forwardDisplay()">Next</button></span>
             </div>
 
-            <div *ngIf="resultsPending">
+            <div *ngIf="status == pending">
                 <span><p class="h3">Results pending &nbsp; &nbsp;</p></span><span><div class="loader"></div></span>
             </div>
+
+
         </div>
     </div>
 </div>
