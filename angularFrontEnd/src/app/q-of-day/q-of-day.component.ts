@@ -13,7 +13,7 @@ export class QOfDayComponent implements OnInit {
   ngOnInit() {
     this.getDailyInfo();
     this.dailyText = "Finding today's quote..."
-  }  
+  }
 
   dailyAuthor = ""
   dailyText = ""
@@ -22,14 +22,29 @@ export class QOfDayComponent implements OnInit {
       // Number of days from January 1, 1970 00:00:00 UTC.
 
     var deviation = (Math.floor(Date.now() / 86400000));
-    var id = (deviation % 4097) + 12;
+    var id = 10; // (deviation % 4097) + 12;
     console.log(id);
-    this.dbServ.getQuery(id.toString(), "id").subscribe(res => this.updateDaily(res["success"]), err => console.log(err));
+    this.dbServ.getQuery(id.toString(), "id")
+               .subscribe(res => {
+                  try {
+                    this.updateDaily(res["success"]);
+                  } catch (err) {
+                    this.updateDailyFailed(err);
+                  }
+                }, err => {
+                  this.updateDailyFailed(err);
+                });
   }
 
   updateDaily(rows) {
     this.dailyAuthor = rows[0].author;
     this.dailyText = rows[0].quote;
+  }
+
+  updateDailyFailed(err) {
+    console.log(err);
+    this.dailyText = "May your choices reflect your hopes, not your fears."
+    this.dailyAuthor = "Nelson Mandela";
   }
 
 }
