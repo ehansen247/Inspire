@@ -100,7 +100,6 @@ const pool = new Pool({
 
 const getTest = (request, response) => {
   pool.query('SELECT * FROM quotes WHERE id = 1', [], (error, results) => {
-    console.log("reached2");
     if (error) {
       throw error
     }
