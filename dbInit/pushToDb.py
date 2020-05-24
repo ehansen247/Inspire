@@ -7,6 +7,7 @@ import psycopg2
 # Quotes indexed from 0 to 4194
 from scrape import getAllQuotes, getQuotesRange, MAX_QUOTE
 import sys
+import os
 
 def main():
 
@@ -25,9 +26,7 @@ def main():
 
 
 
-    conn = psycopg2.connect(user="erichansen",
-                            dbname="inspire",
-                            host="localhost")
+    conn = psycopg2.connect(os.environ["INSPIRE_DB_CONNECTION_STRING"])
     cur = conn.cursor()
 
     # # Uncomment any of the below options to create the tables or enter the user/author data
