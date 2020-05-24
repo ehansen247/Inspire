@@ -1,6 +1,6 @@
 <br>
 <div class="container" id="formDiv">
-    
+
     <!-- <p class="h3">Compose a personal quotation</p> -->
     <br>
     <div class="form-group">
@@ -24,7 +24,7 @@
     <button (click)="submitQuote()" class="btn btn-info">Save</button> <br>
 
     <br>
-    <div *ngIf="justSubmitted">
+    <div *ngIf="showSubmissionText">
         <p class="h4">{{ submissionText }}</p>
     </div>
 </div>

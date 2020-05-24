@@ -22,8 +22,7 @@ export class QOfDayComponent implements OnInit {
       // Number of days from January 1, 1970 00:00:00 UTC.
 
     var deviation = (Math.floor(Date.now() / 86400000));
-    var id = 10; // (deviation % 4097) + 12;
-    console.log(id);
+    var id = (deviation % 4097) + 12;
     this.dbServ.getQuery(id.toString(), "id")
                .subscribe(res => {
                   try {

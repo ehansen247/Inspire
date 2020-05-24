@@ -11,7 +11,7 @@ import { timeout } from 'q';
 })
 
 export class SearchComponent implements OnInit {
-  
+
   constructor(private dbServ :  DbService) {  }
 
   resultsPending = false;
@@ -55,7 +55,6 @@ export class SearchComponent implements OnInit {
   }
 
   forwardDisplay() {
-    console.log("reached0");
     if (this.endIndex < this.queryResults.length)
     {
       this.rowIndex = this.endIndex;
@@ -66,9 +65,8 @@ export class SearchComponent implements OnInit {
   }
 
   backwardDisplay() {
-    console.log("reached1");
     if (this.rowIndex > 0) {
-      this.endIndex = this.rowIndex; 
+      this.endIndex = this.rowIndex;
       this.rowIndex = Math.max(0, this.rowIndex - 5);
       this.displayResults = this.queryResults.slice(this.rowIndex, this.endIndex);
     }

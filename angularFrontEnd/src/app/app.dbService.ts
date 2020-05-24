@@ -21,8 +21,6 @@ export class DbService {
   apiUrl = "";
 
   getQuery(text, type) {
-    console.log("Reached!!!");
-    console.log(this.apiUrl);
     const results = this.http.post(this.apiUrl + "search", {"text": text, "type": type});
     return results;
   }
