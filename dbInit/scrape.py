@@ -5,6 +5,7 @@
 from bs4 import BeautifulSoup
 import requests
 
+MAX_QUOTE=4194
 
 # Returns a single quote, author object from quotedb.com
 def getQuoteInfo(num):
@@ -28,15 +29,15 @@ def getQuoteInfo(num):
         "quote": quote_text
     })
 
-
 # Builds and returns a list of quotes from quotedb.com
-def getAllQuotes():
+def getQuotesRange(start, end):
     quotes = []
-
-    for i in range(4170, 4194):
+    for i in range(start, end):
         try:
             quotes.append(getQuoteInfo(i))
-        except: 
+        except:
             continue
-    
     return quotes
+
+def getAllQuotes():
+    return getQuotesRange(0, MAX_QUOTE)

@@ -4,34 +4,59 @@
 
 
 import psycopg2
-from scrape import getAllQuotes
+# Quotes indexed from 0 to 4194
+from scrape import getAllQuotes, getQuotesRange, MAX_QUOTE
+import sys
 
 def main():
+
+    # Parse Command Line Arguments
+    num_args = len(sys.argv)
+    start, end = None, None
+    if num_args != 1 and num_args != 3:
+        print("Enter a valid number of arguments")
+        return -1
+
+    if num_args == 3:
+        start, end = int(sys.argv[1]), int(sys.argv[2])
+        if start < 0 or end > MAX_QUOTE or start > end:
+            print("Arguments do not fall in valid range")
+            return -1
+
+
 
     conn = psycopg2.connect(user="erichansen",
                             dbname="inspire",
                             host="localhost")
     cur = conn.cursor()
 
-    # Uncomment any of the below options to create the tables or enter the user/author data
-    # As of 07/27/19, all necessary data has been created in the above database.
-
+    # # Uncomment any of the below options to create the tables or enter the user/author data
     # createUserQuotesTable(conn, cur)
 
     # createAuthorTable(conn, cur)
 
     # createQuoteTable(conn, cur)
 
-    fillTables(conn, cur)
+    # # Fill Entire Table
+    if num_args == 3:
+        fillTableRange(conn, cur, start, end)
+    else:
+        fillTable(conn, cur)
+
 
     # Save Changes and Close communication with database
     conn.commit()
     cur.close()
     conn.close()
 
+    return 0
+
 # Fill Quote and Author Tables with Values
-def fillTables(conn, cur):
-    for item in getAllQuotes():
+def fillTable(conn, cur):
+    fillTableRange(conn, cur, 0, MAX_QUOTE)
+
+def fillTableRange(conn, cur, start, end):
+    for item in getQuotesRange(start, end):
         q = item["quote"]
         a = item["author"]
         cur.execute("INSERT INTO quotes (quote_text, author, length) VALUES (%s, %s, %s)", (q, a, len(q)))

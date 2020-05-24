@@ -102,10 +102,8 @@ app.post('/api/submitUserQuote', (req, res) => {
 app.get('/api/test', db.getTest);
 
 // API will listen on localhost: 8000
-const PORT = 8000;
-
-app.listen(PORT, () => {
-  console.log(`server running on port ${PORT}`)
+app.listen(process.env.PORT || 8000, () => {
+  console.log(`server running on port ${process.env.PORT || 8000}`)
 });
 
 

@@ -12,7 +12,7 @@ export class DbService {
   constructor(private http: HttpClient) {
     // Should be http://localhost:8000/api/ for local
     if (environment.production) {
-      this.apiUrl = "http://localhost:8000/api/";
+      this.apiUrl = "https://inspire-backend.herokuapp.com/api/";
     } else {
       this.apiUrl = "http://localhost:8000/api/";
     }

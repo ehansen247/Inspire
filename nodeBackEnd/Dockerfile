@@ -11,6 +11,8 @@ RUN npm install
 
 # Bundle app source
 COPY . .
+
+# Only necessary for local environment
 EXPOSE 8000
 
 CMD [ "node", "server.js" ]
